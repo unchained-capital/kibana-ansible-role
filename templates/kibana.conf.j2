@@ -1,9 +1,5 @@
 # {{ ansible_managed }}
 
-upstream elasticsearch {
-    server {{ nginx_elasticsearch_host }};
-}
-
 server {
     listen              443 ssl;
     server_name         {{ kibana_fqdn }};
@@ -23,7 +19,7 @@ server {
         include    {{ kibana_firewall_rules }};
     }
     
-    location ~ ^/kibana-int/(temp|dashboard).*$ {
+    location ~ ^/{{ kibana_elasticsearch_index }}/(temp|dashboard).*$ {
         proxy_pass http://elasticsearch;
         include    {{ kibana_proxy_params }};
         include    {{ kibana_firewall_rules }};        
