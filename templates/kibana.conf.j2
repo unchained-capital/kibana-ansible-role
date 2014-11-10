@@ -1,0 +1,31 @@
+# {{ ansible_managed }}
+
+upstream elasticsearch {
+    server {{ nginx_elasticsearch_host }};
+}
+
+server {
+    listen              443 ssl;
+    server_name         {{ kibana_fqdn }};
+
+    access_log          {{ kibana_log_dir }}/nginx.access.log;
+    error_log           {{ kibana_log_dir }}/nginx.error.log;
+    
+    location / {
+        root     {{ kibana_public_dir }};
+        index    index.html;
+        include  {{ kibana_firewall_rules }};
+    }
+
+    location ~ ^.*/_(aliases|nodes|search|mapping)$ {
+        proxy_pass http://elasticsearch;
+        include    {{ kibana_proxy_params }};
+        include    {{ kibana_firewall_rules }};
+    }
+    
+    location ~ ^/kibana-int/(temp|dashboard).*$ {
+        proxy_pass http://elasticsearch;
+        include    {{ kibana_proxy_params }};
+        include    {{ kibana_firewall_rules }};        
+    }
+}

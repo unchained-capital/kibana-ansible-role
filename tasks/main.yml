@@ -1,0 +1,53 @@
+---
+
+- name: Create home directory
+  file: state=directory path="{{ kibana_home_dir }}" owner=root group=root mode=0755
+  tags:
+    - kibana
+
+- name: Download release
+  get_url: url="https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz" dest="{{ kibana_home_dir }}/kibana-{{ kibana_version }}.tar.gz" owner=root group=root mode=0644
+  tags:
+    - kibana
+
+- name: Unzip release
+  command: "tar -xzf kibana-{{ kibana_version }}.tar.gz"
+  args:
+    chdir:   "{{ kibana_home_dir }}"
+    creates: "{{ kibana_home_dir }}/kibana-{{ kibana_version }}"
+  register: new_kibana_release_directory
+  tags:
+    - kibana
+
+- name: Link latest release
+  file: state=link src="{{ kibana_home_dir }}/kibana-{{ kibana_version }}" dest="{{ kibana_home_dir }}/current" owner=root group=root mode=0755
+  when: new_kibana_release_directory.changed
+  tags:
+    - kibana
+
+- name: Create configuration file
+  template: src=config.js.j2 dest="{{ kibana_public_dir }}/config.js" owner=root group=root mode=0644
+  tags:
+    - kibana
+
+- name: Create log directory
+  file: state=directory path={{ kibana_log_dir }} owner={{ kibana_user }} group={{ kibana_group }} mode=0755
+  tags:
+    - kibana
+    - logging
+
+- name: Create nginx configuration
+  template: src=kibana.conf.j2 dest=/etc/nginx/sites-available/kibana.conf owner=root group=root mode=0644
+  notify:
+    - restart nginx
+  tags:
+    - kibana
+    - nginx
+      
+- name: Enable nginx configuration
+  file: state=link src=/etc/nginx/sites-available/kibana.conf dest=/etc/nginx/sites-enabled/kibana.conf owner=root group=root mode=0644
+  tags:
+    - kibana
+    - nginx
+
+- include: logstash.yml

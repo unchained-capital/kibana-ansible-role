@@ -1,0 +1,33 @@
+---
+
+kibana_version:      3.1.2
+
+kibana_user:         www-data   # to match nginx
+kibana_group:        www-data   # to match nginx
+
+kibana_home_dir:   /srv/kibana
+kibana_public_dir: /srv/kibana/current
+kibana_log_dir:    /var/log/kibana
+
+# This is where nginx can find ElasticSearch on the backend.  Should
+# not be directly accessed by the user.
+nginx_elasticsearch_host: "localhost:9200"
+
+# This is where the browser can find ElasticSearch through the
+# frontend.  Should be pointed back at nginx so it can proxy to the
+# (real) backend ElasticSearch.
+kibana_elasticsearch_url: 'http://"+window.location.hostname+":9200'
+
+# This is the same as the value of the Host header passed in by the
+# browser, e.g. - the domain the user thinks she is browsing.
+kibana_fqdn:           kibana.example.com
+
+# These files should exist and implement the desired firewall and
+# proxy parameters for nginx.
+kibana_firewall_rules: /etc/nginx/conf.d/firewall.conf
+kibana_proxy_params:   /etc/nginx/proxy_params
+
+kibana_default_route: /dashboard/file/default.json
+kibana_elasticsearch_index: kibana-int
+
+logstash_conf_dir: /etc/logstash/conf.d
