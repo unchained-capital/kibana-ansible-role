@@ -27,4 +27,5 @@ kibana_proxy_params:   /etc/nginx/proxy_params
 kibana_default_route: /dashboard/file/default.json
 kibana_elasticsearch_index: kibana-int
 
+kibana_use_logstash: true
 logstash_conf_dir: /etc/logstash/conf.d

@@ -4,6 +4,7 @@
   template: src=logstash.conf.j2 dest="{{ logstash_conf_dir }}/kibana.conf" owner=root group=root mode=0644
   notify:
     - restart logstash
+  when: kibana_use_logstash
   tags:
     - kibana
     - logstash
