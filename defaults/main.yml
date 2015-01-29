@@ -21,7 +21,7 @@ kibana_elasticsearch_url: https://kibana.example.com
 
 # These files should exist and implement the desired firewall and
 # proxy parameters for nginx.
-kibana_firewall_rules: /etc/nginx/conf.d/firewall.conf
+kibana_firewall_rules: /etc/nginx/firewall.conf
 kibana_proxy_params:   /etc/nginx/proxy_params
 
 kibana_default_route: /dashboard/file/default.json
