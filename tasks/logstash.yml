@@ -5,6 +5,3 @@
   notify:
     - restart logstash
   when: kibana_use_logstash
-  tags:
-    - kibana
-    - logstash
