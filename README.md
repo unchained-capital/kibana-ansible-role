@@ -18,9 +18,6 @@ access to port 9200 on your ElasticSearch cluster to the same browser
 that is using Kibana.  Authentication is handled via an nginx
 firewall.
 
-Also creates a logstash input file for Kibana's logs.  Disable this by
-setting `kibana_use_logstash` to `false`.
-
 ## Assumptions
 
 Assumes you have already installed nginx, ElasticSearch and that you
@@ -42,7 +39,6 @@ Creates the files:
 
 * `/etc/nginx/sites-available/kibana.conf` -- nginx virtual host for kibana
 * `/var/log/kibana` -- log directory
-* `/etc/logstash/conf.d/kibana.conf` -- inputs for logstash
 
 ## Services
 
@@ -71,7 +67,6 @@ The following variables are exposed for configuration:
 * `kibana_proxy_params` -- path to nginx proxy params
 * `kibana_default_route` -- default dashboard to open
 * `kibana_elasticsearch_index` -- name of ElasticSearch index used by Kibana (default: kibana-int)
-* `kibana_use_logstash` -- set to `false` to skip logstash configuration
 
 Ensure that `kibana_elasticsearch_url` and `kibana_fqdn` match.  It is
 **not** necessary to directly connect the end-user's browser to port
