@@ -72,9 +72,3 @@
   tags:
     - kibana
     - nginx
-    
-- include: logstash.yml
-  when: kibana_use_logstash
-  tags:
-    - kibana
-    - logstash

@@ -35,10 +35,3 @@ kibana_fqdn:           kibana.example.com
 kibana_ssl_params:     /etc/nginx/ssl.conf
 kibana_firewall_rules: /etc/nginx/firewall.conf
 kibana_proxy_params:   /etc/nginx/proxy_params
-
-#
-# Logstash
-#
-
-kibana_use_logstash: true
-logstash_conf_dir: /etc/logstash/conf.d
