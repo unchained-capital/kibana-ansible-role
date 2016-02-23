@@ -36,6 +36,12 @@
   tags:
     - kibana
     - logging
+
+- name: Create logrotate configuration file
+  template: src=logrotate.j2 dest="{{ kibana_logrotate_dir }}/kibana" owner=root group=root mode=0644
+  tags:
+    - kibana
+    - logrotate
     
 - name: Create Kibana configuration file
   template: src=kibana.yml.j2 dest="{{ kibana_conf_dir }}/kibana.yml" owner=root group=root mode=0644
