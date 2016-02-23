@@ -62,13 +62,3 @@
   tags:
     - kibana
     - service
-
-- include: nginx.yml
-  tags:
-    - kibana
-
-- include: nginx.yml
-  when: kibana_use_nginx
-  tags:
-    - kibana
-    - nginx

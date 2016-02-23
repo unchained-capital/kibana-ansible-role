@@ -6,8 +6,8 @@
 
 kibana_version:      4.3.1
 kibana_arch:         linux-x64
-kibana_user:         www-data   # to match nginx
-kibana_group:        www-data   # to match nginx
+kibana_user:         www-data
+kibana_group:        www-data
 kibana_prefix_dir: /usr/local/share
 kibana_home_dir:   /usr/local/share/kibana
 kibana_log_dir:    /var/log/kibana
@@ -25,13 +25,3 @@ kibana_elasticsearch_url: http://localhost:9200
 kibana_preserve_host: true
 kibana_index: .kibana
 kibana_default_app_id: discover
-
-#
-# nginx
-#
-
-kibana_use_nginx:      true
-kibana_fqdn:           kibana.example.com
-kibana_ssl_params:     /etc/nginx/ssl.conf
-kibana_firewall_rules: /etc/nginx/firewall.conf
-kibana_proxy_params:   /etc/nginx/proxy_params
