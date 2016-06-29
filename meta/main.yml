@@ -8,6 +8,9 @@ galaxy_info:
      versions:
       - trusty
   categories:
-   - applications
-dependencies: ~
-
+   - operations
+   - dashboards
+   - logstash
+   - elasticsearch
+   - ELK
+dependencies: []
