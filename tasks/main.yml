@@ -13,8 +13,9 @@
 - name: Unzip release
   unarchive:
   args:
+    copy:    no
     src:     "{{ kibana_prefix_dir }}/kibana-{{ kibana_version }}-{{kibana_arch}}.tar.gz"
-    dest:    "{{ kibana_prefix_dir }}/kibana-{{ kibana_version }}-{{kibana_arch}}"
+    dest:    "{{ kibana_prefix_dir }}"
     creates: "{{ kibana_prefix_dir }}/kibana-{{ kibana_version }}-{{kibana_arch}}"
   register: new_kibana_release_directory
   tags:

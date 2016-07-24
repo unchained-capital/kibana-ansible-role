@@ -18,19 +18,20 @@
 # Loop though kibana_plugins and install them
 
 - name: Removing Old Plugins
-  shell: bin/kibana plugin --remove {{ item.name }}
-    chdir={{ kibana_home_dir }}
+  shell: "bin/kibana plugin --remove {{ item.name }}"
+  args:
+    chdir: "{{ kibana_home_dir }}"
   when: item.name is defined and item.reinstall is defined and item.reinstall == True
-  with_items: kibana_plugins
+  with_items: "{{ kibana_plugins }}"
   ignore_errors: yes
   
 - name: Installing Plugins
-  shell: bin/kibana plugin --install {{ item.name }} {{ '--url ' + item.url if item.url is defined else '' }}
-    chdir={{ kibana_home_dir }}
-  with_items: kibana_plugins
+  shell: "bin/kibana plugin --install {{ item.name }} {{ '--url ' + item.url if item.url is defined else '' }}"
+  args:
+    chdir: "{{ kibana_home_dir }}"
+  with_items: "{{ kibana_plugins }}"
   notify:
     - restart kibana
   register: kibana_plugins_installed
   changed_when: "'Installed' in kibana_plugins_installed.stdout"
-  failed_when: "kibana_plugins_installed.rc != 0 and kibana_plugins_installed.stderr.find('already exists') == -1"
-  
+  failed_when: kibana_plugins_installed.rc != 0 and kibana_plugins_installed.stderr.find('already exists') == -1

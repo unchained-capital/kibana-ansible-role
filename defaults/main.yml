@@ -4,7 +4,7 @@
 # Installation options
 #
 
-kibana_version:      4.3.1
+kibana_version:      4.5.1      # latest as of 2016-07-04
 kibana_arch:         linux-x64
 kibana_user:         www-data
 kibana_group:        www-data
