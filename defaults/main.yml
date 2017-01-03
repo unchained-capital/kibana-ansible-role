@@ -8,8 +8,8 @@ kibana_version:      5.1.1 # latest as of 2016-12-22
 kibana_arch:         amd64
 kibana_release_name:      "kibana-{{ kibana_version }}-{{ kibana_arch }}"
 kibana_release_url_base:  "https://artifacts.elastic.co/downloads/kibana/{{ kibana_release_name }}"
-kibana_user:         www-data
-kibana_group:        www-data
+kibana_user:         kibana
+kibana_group:        kibana
 kibana_download_dir: /usr/local/src
 kibana_home_dir:   /usr/share/kibana
 kibana_log_dir:    /var/log/kibana
